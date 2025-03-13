@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Gmail Draft Assistant - Success{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow">
+            <div class="card-header bg-success text-white">
+                <h3 class="mb-0">Success!</h3>
+            </div>
+            <div class="card-body text-center">
+                <div class="my-4">
+                    <i class="material-icons" style="font-size: 64px; color: #28a745;">check_circle</i>
+                </div>
+                <h4>All email drafts have been processed successfully!</h4>
+                <p class="lead">
+                    Your personalized emails are now ready in Gmail as drafts or have been sent.
+                </p>
+                
+                <div class="alert alert-info mt-4">
+                    <h5>Next Steps:</h5>
+                    <p>You can review your drafts in Gmail before sending them, or process another batch of contacts.</p>
+                </div>
+                
+                <div class="mt-4">
+                    <a href="{{ url_for('index') }}" class="btn btn-primary btn-lg me-2">
+                        <i class="material-icons align-middle">home</i>
+                        Return to Home
+                    </a>
+                    <a href="{{ url_for('setup') }}" class="btn btn-outline-primary btn-lg">
+                        <i class="material-icons align-middle">replay</i>
+                        Start New Batch
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

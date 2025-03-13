@@ -1,0 +1,299 @@
+{% extends 'base.html' %}
+
+{% block title %}Gmail Draft Assistant - AI Settings{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0">Perplexity API Settings</h3>
+            </div>
+            <div class="card-body">
+                <form action="{{ url_for('ai_settings') }}" method="post">
+                    <!-- API Key Settings -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="mb-0">API Key</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="apiKey" class="form-label">Perplexity API Key</label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="apiKey" name="apiKey" 
+                                           placeholder="Enter your Perplexity API key" required>
+                                    <button class="btn btn-outline-secondary" type="button" id="toggleApiKey">
+                                        <i class="material-icons">visibility</i>
+                                    </button>
+                                </div>
+                                <div class="form-text">Your API key is required to use the Perplexity API.</div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <button type="button" id="testApiButton" class="btn btn-outline-primary">
+                                    <i class="material-icons align-middle">wifi</i>
+                                    Test API Connection
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Model Settings -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="mb-0">Model Settings</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="model" class="form-label">Model</label>
+                                <select class="form-select" id="model" name="model">
+                                    <option value="sonar" selected>sonar</option>
+                                    <option value="sonar-pro">sonar-pro</option>
+                                    <option value="sonar-reasoning">sonar-reasoning</option>
+                                    <option value="sonar-reasoning-pro">sonar-reasoning-pro</option>
+                                    <option value="sonar-deep-research">sonar-deep-research</option>
+                                    <option value="r1-1776">r1-1776</option>
+                                </select>
+                                <div class="form-text">The model used for generating emails. Better models may cost more.</div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="temperature" class="form-label">Temperature: <span id="temperatureValue">0.7</span></label>
+                                <input type="range" class="form-range" id="temperature" name="temperature" 
+                                       min="0" max="1" step="0.1" value="0.7">
+                                <div class="form-text">Controls randomness: Lower values are more focused, higher values more creative.</div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="topP" class="form-label">Top P: <span id="topPValue">0.9</span></label>
+                                        <input type="range" class="form-range" id="topP" name="topP" 
+                                               min="0.1" max="1" step="0.1" value="0.9">
+                                        <div class="form-text">Controls diversity (higher = more diverse)</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="freqPenalty" class="form-label">Frequency Penalty: <span id="freqPenaltyValue">0.0</span></label>
+                                        <input type="range" class="form-range" id="freqPenalty" name="freqPenalty" 
+                                               min="0" max="2" step="0.1" value="0.0">
+                                        <div class="form-text">Reduces repetition (higher = less repetition)</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Custom Prompt -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="mb-0">Custom AI Prompt Template</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="customPrompt" class="form-label">Prompt Template</label>
+                                <textarea class="form-control" id="customPrompt" name="customPrompt" rows="8" required>{{ default_prompt }}</textarea>
+                                <div class="form-text">
+                                    Create your custom AI prompt. The variables {first_name} and {company} will be replaced with recipient information.
+                                </div>
+                            </div>
+                            
+                            <div class="alert alert-info">
+                                <h6>Tips for effective prompts:</h6>
+                                <ul>
+                                    <li>Be specific about tone, length, and style</li>
+                                    <li>Include instructions about what to mention or avoid</li>
+                                    <li>Specify the email purpose (e.g., "Write a sales outreach email...")</li>
+                                    <li>Guide the AI to reference specific aspects of the company</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Submit Button -->
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="material-icons align-middle">save</i>
+                            Save Settings
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- External Links -->
+        <div class="card shadow mt-4">
+            <div class="card-header bg-info text-white">
+                <h5 class="mb-0">Perplexity API Resources</h5>
+            </div>
+            <div class="card-body">
+                <div class="d-grid gap-2">
+                    <a href="https://docs.perplexity.ai/docs/getting-started" class="btn btn-outline-info" target="_blank">
+                        <i class="material-icons align-middle">launch</i>
+                        Get a Perplexity API key
+                    </a>
+                    <a href="https://docs.perplexity.ai/reference/post_chat_completions" class="btn btn-outline-info" target="_blank">
+                        <i class="material-icons align-middle">launch</i>
+                        Perplexity API documentation
+                    </a>
+                    <a href="https://docs.perplexity.ai/guides/model-cards" class="btn btn-outline-info" target="_blank">
+                        <i class="material-icons align-middle">launch</i>
+                        Perplexity model documentation
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- API Test Modal -->
+<div class="modal fade" id="apiTestModal" tabindex="-1" aria-labelledby="apiTestModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="apiTestModalLabel">API Connection Test</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="apiTestStatus" class="mb-3">
+                    <div class="d-flex justify-content-center">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Testing...</span>
+                        </div>
+                    </div>
+                    <p class="text-center mt-2">Testing API connection...</p>
+                </div>
+                <div id="apiTestResult" class="d-none">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Handle slider value displays
+    document.getElementById('temperature').addEventListener('input', function() {
+        document.getElementById('temperatureValue').textContent = this.value;
+    });
+    
+    document.getElementById('topP').addEventListener('input', function() {
+        document.getElementById('topPValue').textContent = this.value;
+    });
+    
+    document.getElementById('freqPenalty').addEventListener('input', function() {
+        document.getElementById('freqPenaltyValue').textContent = this.value;
+    });
+    
+    // Toggle API key visibility
+    document.getElementById('toggleApiKey').addEventListener('click', function() {
+        const apiKeyInput = document.getElementById('apiKey');
+        const icon = this.querySelector('i');
+        
+        if (apiKeyInput.type === 'password') {
+            apiKeyInput.type = 'text';
+            icon.textContent = 'visibility_off';
+        } else {
+            apiKeyInput.type = 'password';
+            icon.textContent = 'visibility';
+        }
+    });
+    
+    // API testing functionality
+    document.getElementById('testApiButton').addEventListener('click', function() {
+        const apiKey = document.getElementById('apiKey').value.trim();
+        const model = document.getElementById('model').value;
+        
+        if (!apiKey) {
+            alert('Please enter an API key first');
+            return;
+        }
+        
+        // Show the modal
+        const apiTestModal = new bootstrap.Modal(document.getElementById('apiTestModal'));
+        apiTestModal.show();
+        
+        // Reset the modal content
+        document.getElementById('apiTestStatus').classList.remove('d-none');
+        document.getElementById('apiTestResult').classList.add('d-none');
+        document.getElementById('apiTestResult').innerHTML = '';
+        
+        // Make API test request
+        fetch('/test-api', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                apiKey: apiKey,
+                model: model
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Hide loading indicator
+            document.getElementById('apiTestStatus').classList.add('d-none');
+            
+            // Show results
+            const resultDiv = document.getElementById('apiTestResult');
+            resultDiv.classList.remove('d-none');
+            
+            if (data.success) {
+                resultDiv.innerHTML = `
+                    <div class="alert alert-success">
+                        <h4 class="alert-heading">✅ API Connection Successful!</h4>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">API Response</div>
+                        <div class="card-body">
+                            <p><strong>Model:</strong> ${data.model || model}</p>
+                            <p><strong>Response:</strong> ${data.content}</p>
+                            ${data.usage ? `
+                                <p><strong>Tokens Used:</strong> ${data.usage.total_tokens || 'N/A'} 
+                                (Prompt: ${data.usage.prompt_tokens || 'N/A'}, 
+                                Completion: ${data.usage.completion_tokens || 'N/A'})</p>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+            } else {
+                resultDiv.innerHTML = `
+                    <div class="alert alert-danger">
+                        <h4 class="alert-heading">❌ API Connection Failed!</h4>
+                        <p>${data.error || 'Unknown error'}</p>
+                        ${data.status ? `<p>Status Code: ${data.status}</p>` : ''}
+                    </div>
+                    <div class="alert alert-warning">
+                        <p>Please check:</p>
+                        <ul>
+                            <li>Your API key is correct</li>
+                            <li>You have an active Perplexity account</li>
+                            <li>The selected model is available to your account</li>
+                        </ul>
+                    </div>
+                `;
+            }
+        })
+        .catch(error => {
+            // Hide loading indicator
+            document.getElementById('apiTestStatus').classList.add('d-none');
+            
+            // Show error
+            const resultDiv = document.getElementById('apiTestResult');
+            resultDiv.classList.remove('d-none');
+            resultDiv.innerHTML = `
+                <div class="alert alert-danger">
+                    <h4 class="alert-heading">Error Testing API</h4>
+                    <p>${error.message || 'Failed to connect to the server'}</p>
+                </div>
+            `;
+        });
+    });
+</script>
+{% endblock %}

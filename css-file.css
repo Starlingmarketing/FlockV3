@@ -1,0 +1,114 @@
+/* Custom styles for Gmail Draft Assistant */
+
+/* Material icons alignment fix */
+.material-icons {
+    vertical-align: middle;
+    margin-top: -3px;
+    margin-right: 3px;
+}
+
+/* Card styling */
+.card {
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.card-header {
+    font-weight: 500;
+}
+
+.card .shadow {
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Progress bar styling */
+.progress {
+    height: 25px;
+    margin-top: 10px;
+}
+
+.progress-bar {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 25px;
+    text-align: center;
+    padding: 0 10px;
+}
+
+/* Form controls */
+.form-control:focus, .form-select:focus {
+    border-color: #4e73df;
+    box-shadow: 0 0 0 0.25rem rgba(78, 115, 223, 0.25);
+}
+
+/* Button styling */
+.btn {
+    border-radius: 4px;
+    padding: 8px 16px;
+    text-transform: none;
+    font-weight: 500;
+}
+
+.btn-lg {
+    padding: 10px 24px;
+    font-size: 16px;
+}
+
+.btn-primary {
+    background-color: #4e73df;
+    border-color: #4e73df;
+}
+
+.btn-primary:hover {
+    background-color: #2e59d9;
+    border-color: #2653d4;
+}
+
+/* Alerts */
+.alert {
+    border-radius: 6px;
+}
+
+/* Footer styling */
+.footer {
+    margin-top: 40px;
+    border-top: 1px solid #e3e6f0;
+}
+
+/* Instructions card */
+.alert-info {
+    background-color: #e8f4fd;
+    border-color: #b8e4fd;
+    color: #0c5460;
+}
+
+/* Status indicators */
+.badge {
+    font-weight: 500;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+/* Textarea for email body */
+#emailBody {
+    min-height: 200px;
+    font-family: Arial, sans-serif;
+}
+
+/* Hide scrollbar for textarea in Chrome, Safari and Opera */
+textarea::-webkit-scrollbar {
+    width: 8px;
+}
+
+textarea::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+textarea::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+textarea::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

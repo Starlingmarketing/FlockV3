@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% block title %}Gmail Draft Assistant - Home{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h2 class="mb-0">Welcome to Gmail Draft Assistant</h2>
+            </div>
+            <div class="card-body">
+                <h4 class="card-title">Create personalized Gmail draft emails easily</h4>
+                <p class="card-text">
+                    This web application helps you create personalized Gmail draft emails for multiple recipients using a CSV file. 
+                    You can use a template or generate unique emails using AI through the Perplexity API.
+                </p>
+                
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-header">
+                                <h5 class="mb-0">
+                                    <i class="material-icons align-middle">description</i>
+                                    Template-Based Emails
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <p>Create emails using a predefined template with personalization variables like {first_name} and {company}.</p>
+                                <ul>
+                                    <li>Upload your contacts CSV</li>
+                                    <li>Set up your email template</li>
+                                    <li>Generate personalized drafts</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-header">
+                                <h5 class="mb-0">
+                                    <i class="material-icons align-middle">auto_awesome</i>
+                                    AI-Generated Emails
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <p>Use the Perplexity API to generate unique, personalized emails for each recipient.</p>
+                                <ul>
+                                    <li>Upload your contacts CSV</li>
+                                    <li>Configure your Perplexity API settings</li>
+                                    <li>Create custom prompt template</li>
+                                    <li>Generate AI-crafted emails</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-4 text-center">
+                    <a href="{{ url_for('setup') }}" class="btn btn-primary btn-lg">
+                        <i class="material-icons align-middle">play_arrow</i>
+                        Get Started
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card shadow mt-4">
+            <div class="card-header bg-info text-white">
+                <h4 class="mb-0">How It Works</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 text-center mb-3">
+                        <div class="bg-light p-3 rounded-circle mx-auto d-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                            <i class="material-icons" style="font-size: 40px;">upload_file</i>
+                        </div>
+                        <h5 class="mt-2">1. Upload CSV</h5>
+                        <p>Upload a CSV with your contacts</p>
+                    </div>
+                    <div class="col-md-3 text-center mb-3">
+                        <div class="bg-light p-3 rounded-circle mx-auto d-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                            <i class="material-icons" style="font-size: 40px;">settings</i>
+                        </div>
+                        <h5 class="mt-2">2. Configure</h5>
+                        <p>Set up template or AI settings</p>
+                    </div>
+                    <div class="col-md-3 text-center mb-3">
+                        <div class="bg-light p-3 rounded-circle mx-auto d-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                            <i class="material-icons" style="font-size: 40px;">edit_note</i>
+                        </div>
+                        <h5 class="mt-2">3. Generate</h5>
+                        <p>Create personalized email drafts</p>
+                    </div>
+                    <div class="col-md-3 text-center mb-3">
+                        <div class="bg-light p-3 rounded-circle mx-auto d-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                            <i class="material-icons" style="font-size: 40px;">send</i>
+                        </div>
+                        <h5 class="mt-2">4. Use in Gmail</h5>
+                        <p>Copy into Gmail as drafts</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
